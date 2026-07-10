@@ -1,2 +1,3 @@
 # OIBSIP
-Cyber Security Internship Tasks - Oasis Infobyte Internship
+OIBSIP
+  CyberSecurity-Task1-BasicNetworkScanningWithNmap
