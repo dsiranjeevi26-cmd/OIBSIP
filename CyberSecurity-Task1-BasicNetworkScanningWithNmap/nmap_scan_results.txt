@@ -1,0 +1,168 @@
+========================================
+NMAP SCAN RESULTS
+========================================
+
+Target IP Address:
+172.16.31.155
+
+========================================
+1. Basic Scan
+========================================
+
+Command Used:
+nmap 172.16.31.155
+
+Result:
+- Host is up.
+- Scan completed successfully.
+- 981 TCP ports are closed (reset).
+
+Open Ports:
+
+1. Port: 135/tcp
+   State: Open
+   Service: msrpc
+
+2. Port: 139/tcp
+   State: Open
+   Service: netbios-ssn
+
+3. Port: 445/tcp
+   State: Open
+   Service: microsoft-ds
+
+Filtered Ports:
+25 (SMTP)
+110 (POP3)
+119 (NNTP)
+125 (Locus Map)
+143 (IMAP)
+465 (SMTPS)
+548 (AFP)
+563 (SNEWS)
+587 (Submission)
+800 (MDBS Daemon)
+903 (ISS Console Manager)
+993 (IMAPS)
+995 (POP3S)
+1025 (NFS-or-IIS)
+1122 (Availant Manager)
+1433 (MS SQL Server)
+
+Observation:
+The target host is active and responding to network requests. Three ports (135, 139, and 445) are open, while several other ports are filtered, indicating that they are likely protected by a firewall or filtering device.
+
+
+========================================
+2. Service Version Scan
+========================================
+
+Command Used:
+nmap -sV 172.16.31.155
+
+Scan Result:
+
+- Host Status: Host is up.
+- Scan Duration: 16.26 seconds.
+- Total Closed Ports: 981 TCP ports (reset).
+
+Service Versions Detected:
+
+Port: 135/tcp
+State: Open
+Service: msrpc
+Version: Microsoft Windows RPC
+
+Port: 139/tcp
+State: Open
+Service: netbios-ssn
+Version: Microsoft Windows netbios-ssn
+
+Port: 445/tcp
+State: Open
+Service: microsoft-ds
+Version: Version information not detected.
+
+Service Information:
+Operating System: Windows
+
+Observation:
+
+The service version scan identified Microsoft Windows services running on ports 135 and 139. Port 445 is open and running the Microsoft-DS service, but Nmap could not determine the exact version. This information helps identify the services available on the target system and can be useful for security assessment and system administration.
+
+
+========================================
+3. OS Detection Scan
+========================================
+
+Command Used:
+nmap -O 172.16.31.155
+
+Scan Result:
+
+- Host Status: Host is up.
+- Scan Duration: 10.39 seconds.
+- Total Closed Ports: 981 TCP ports (reset).
+
+Open Ports Detected:
+
+135/tcp  Open  msrpc
+139/tcp  Open  netbios-ssn
+445/tcp  Open  microsoft-ds
+
+Operating System Detection:
+
+Nmap detected the target system as Microsoft Windows. The scan suggested several possible Windows versions, including Windows 11, Windows 10, and Windows Server 2022. However, Nmap reported that there was no exact OS match because the test conditions were not ideal.
+
+Network Distance:
+0 hops
+
+Observation:
+
+The OS detection scan indicates that the target system is running a Microsoft Windows operating system. Although the exact version could not be identified with complete certainty, the scan successfully determined that the host belongs to the Windows operating system family.
+
+========================================
+4. Open Ports Explanation
+========================================
+
+Port: 135/tcp
+Service: MSRPC (Microsoft Remote Procedure Call)
+
+Purpose:
+MSRPC is used by Microsoft Windows for communication between applications and services. It allows programs on one computer to request services from another computer on the network.
+
+Security Risk:
+If this port is exposed to untrusted networks, attackers may attempt to exploit Windows RPC vulnerabilities. It should be protected by a firewall and kept updated with security patches.
+
+----------------------------------------
+
+Port: 139/tcp
+Service: NetBIOS-SSN
+
+Purpose:
+NetBIOS-SSN is used for Windows file and printer sharing. It enables computers on a local network to share files, folders, and printers.
+
+Security Risk:
+If improperly configured, attackers may gain access to shared files or collect information about the system. File sharing should only be enabled on trusted networks.
+
+----------------------------------------
+
+Port: 445/tcp
+Service: Microsoft-DS (SMB)
+
+Purpose:
+Microsoft-DS uses the Server Message Block (SMB) protocol to provide file sharing, printer sharing, and other Windows network services.
+
+Security Risk:
+If SMB is outdated or not properly secured, it can be targeted by malware and network attacks. Keeping Windows updated and restricting SMB access helps reduce this risk.
+
+
+========================================
+5. Summary
+========================================
+
+This project demonstrated the use of Nmap for basic network scanning, service version detection, and operating system detection.
+
+The scan identified three open ports (135, 139, and 445) on the target host. These ports are commonly used by Microsoft Windows for remote procedure calls, file sharing, and network communication. The service version scan confirmed Microsoft Windows services, and the OS detection scan identified the target as a Microsoft Windows operating system.
+
+Several other ports were reported as filtered, indicating that they are protected by firewall rules or network filtering. Based on the scan results, the system appears to have standard Windows networking services enabled. Proper firewall configuration, regular system updates, and restricting unnecessary network services can help improve the overall security of the system.
