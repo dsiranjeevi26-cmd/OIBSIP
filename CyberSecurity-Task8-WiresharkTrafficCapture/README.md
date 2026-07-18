@@ -23,15 +23,15 @@ The objective of this task is to capture live network traffic using Wireshark, a
 
 2. Ran the Wireshark installer.
 
-3. Installed Npcap when prompted. Npcap is required to capture network packets on Windows.
+3. Installed Npcap during the installation process. Npcap is required for capturing network packets on Windows.
 
 4. Completed the installation and launched Wireshark.
 
-### Permissions Required
+## Permissions Required
 
 Wireshark requires permission to access the network interface.
 
-- On Windows, packet capturing may require **Administrator privileges**.
+- Packet capturing may require running Wireshark with **Administrator privileges**.
 - Npcap must be installed and enabled during setup.
 
 ---
@@ -41,24 +41,30 @@ Wireshark requires permission to access the network interface.
 1. Opened Wireshark.
 2. Selected the active Ethernet network interface.
 3. Started packet capture.
-4. Browsed several websites to generate network traffic.
-5. Continued capturing traffic for **more than 2 minutes**.
+4. Browsed multiple websites to generate network traffic.
+5. Captured live network traffic for more than **2 minutes**.
 6. Stopped the capture.
-7. Saved the capture file as:
+7. Exported the capture as:
+
+```text
+wireshark_capture.pcap
+```
+
+The capture file is included in this GitHub repository.
 
 ---
 
 # HTTP Display Filter
 
-### Filter Used
+## Filter Used
 
-```
+```text
 http
 ```
 
-### Observation
+## Observation
 
-The HTTP filter displayed unencrypted HTTP requests and responses.
+The HTTP display filter showed unencrypted HTTP requests and responses.
 
 Captured packets included:
 
@@ -66,25 +72,27 @@ Captured packets included:
 - HTTP/1.1 200 OK
 - HTTP/1.1 301 Moved Permanently
 
+The corresponding screenshot is available in the **screenshots** folder.
+
 ---
 
 # DNS Display Filter
 
-### Filter Used
+## Filter Used
 
-```
+```text
 dns
 ```
 
-### Observation
+## Observation
 
-The DNS filter displayed DNS queries and responses.
+The DNS display filter showed DNS queries and responses used to resolve domain names into IP addresses.
 
 Observed:
 
 - Standard DNS Query
 - Standard DNS Response
-- Domain name resolution
+- Domain Name Resolution
 
 Example domains observed:
 
@@ -92,43 +100,43 @@ Example domains observed:
 - googleapis.com
 - neverssl.com
 
+The corresponding screenshot is available in the **screenshots** folder.
+
 ---
 
 # TCP Display Filter
 
-### Filter Used
+## Filter Used
 
-```
+```text
 tcp
 ```
 
-### TCP Three-Way Handshake Analysis
+## TCP Three-Way Handshake Analysis
 
-A TCP connection is established using three packets.
+TCP establishes a reliable connection using a three-way handshake.
 
 ### Step 1 – SYN
 
-The client sends a SYN packet requesting a connection.
+The client sends a SYN packet requesting to establish a connection.
 
-Packet Number: 11261
-
----
+**Packet Number:** 11261
 
 ### Step 2 – SYN-ACK
 
-The server replies with a SYN-ACK packet acknowledging the request.
+The server replies with a SYN-ACK packet acknowledging the connection request.
 
-Packet Number: 11263
-
----
+**Packet Number:** 11263
 
 ### Step 3 – ACK
 
 The client sends an ACK packet confirming the connection.
 
-Packet Number: 11265
+**Packet Number:** 11265
 
-The TCP connection is successfully established after the three-way handshake.
+After these three packets, the TCP connection is successfully established and data transfer begins.
+
+The corresponding screenshot is available in the **screenshots** folder.
 
 ---
 
@@ -136,16 +144,19 @@ The TCP connection is successfully established after the three-way handshake.
 
 The captured network traffic was exported as:
 
+```text
+wireshark_capture.pcap
+```
 
-The file is included in this GitHub repository.
+The `.pcap` file is included in this GitHub repository for verification and analysis.
 
 ---
 
 # Unencrypted HTTP Packet Analysis
 
-An unencrypted HTTP GET request was captured.
+An unencrypted HTTP GET request was identified during packet analysis.
 
-### Packet Information
+## Packet Information
 
 | Field | Value |
 |-------|-------|
@@ -153,11 +164,10 @@ An unencrypted HTTP GET request was captured.
 | Method | GET |
 | Request | GET / HTTP/1.1 |
 | Host | neverssl.com |
+| Source IP | 10.219.89.106 |
+| Destination IP | 34.223.124.45 |
 | Source Port | 32459 |
 | Destination Port | 80 |
-| Destination IP | 34.223.124.45 |
-
----
 
 ## Information Visible
 
@@ -170,23 +180,23 @@ The following information was visible in plain text:
 - Connection Header
 - Accept Header
 
-Because HTTP does not encrypt data, anyone monitoring the network can read this information.
+Because HTTP traffic is not encrypted, anyone monitoring the network can read this information.
 
 ---
 
 # Why Unencrypted HTTP Traffic Is Dangerous
 
-HTTP sends data in plain text.
+HTTP sends information in plain text without encryption.
 
-Anyone connected to the same network can capture packets using tools such as Wireshark and view transmitted information.
+An attacker connected to the same network can capture packets using tools such as Wireshark and read sensitive information.
 
-Risks include:
+Potential risks include:
 
-- Password theft
 - Username theft
+- Password theft
 - Session hijacking
 - Information disclosure
-- Man-in-the-Middle attacks
+- Man-in-the-Middle (MITM) attacks
 
 ---
 
@@ -194,7 +204,7 @@ Risks include:
 
 HTTPS uses TLS (Transport Layer Security) to encrypt communication between the client and the web server.
 
-Benefits include:
+Benefits of HTTPS include:
 
 - Encrypts transmitted data
 - Prevents packet sniffing
@@ -202,7 +212,7 @@ Benefits include:
 - Verifies the identity of the server
 - Protects data integrity
 
-Even if packets are captured, their contents cannot be read because they are encrypted.
+Even if packets are captured, the contents cannot be read without the encryption keys.
 
 ---
 
@@ -217,7 +227,9 @@ During packet analysis, the following protocols were observed:
 - TLSv1.3
 - ARP
 
-HTTP traffic was readable because it was unencrypted, while HTTPS traffic appeared encrypted.
+The HTTP packet clearly demonstrated that web requests can be viewed in plain text when encryption is not used.
+
+HTTPS traffic appeared encrypted and its contents could not be viewed.
 
 ---
 
@@ -227,15 +239,11 @@ HTTP traffic was readable because it was unencrypted, while HTTPS traffic appear
 
 A packet is a small unit of data transmitted across a network.
 
----
-
 ## Protocol
 
-A protocol is a set of rules that allows devices to communicate over a network.
+A protocol is a set of communication rules that allows devices to exchange data over a network.
 
 Examples include TCP, HTTP, DNS, and HTTPS.
-
----
 
 ## Port
 
@@ -247,26 +255,44 @@ Examples:
 - Port 443 – HTTPS
 - Port 53 – DNS
 
----
-
 ## Payload
 
-The payload is the actual information or data carried inside a packet.
-
----
+The payload is the actual data carried inside a network packet, such as an HTTP request or DNS response.
 
 ## Handshake
 
-A handshake is the process used to establish a communication session before data transfer begins.
+A handshake is the process used to establish communication between two devices before data transmission begins.
 
-TCP uses a three-way handshake consisting of SYN, SYN-ACK, and ACK packets.
+TCP uses a three-way handshake consisting of:
+
+- SYN
+- SYN-ACK
+- ACK
+
+---
+
+# Files Included
+
+```text
+CyberSecurity-Task8-WiresharkTrafficCapture/
+│
+├── README.md
+├── wireshark_capture.pcap
+└── screenshots/
+    ├── capture_started.png
+    ├── dns_filter.png
+    ├── http_get_request.png
+    ├── tcp_three_way_handshake.png
+    └── packet_details.png
+```
+
 ---
 
 # Ethics Note
 
 This packet capture was performed only on my own computer and network for educational purposes.
 
-Traffic was captured only on a network that I own or have permission to analyse.
+Traffic was captured only on a network that I own or have explicit permission to analyse.
 
 No unauthorized systems or public networks were monitored.
 
@@ -274,7 +300,7 @@ No unauthorized systems or public networks were monitored.
 
 # Conclusion
 
-This task provided practical experience with Wireshark and network traffic analysis. Live traffic was captured, filtered using HTTP, DNS, and TCP display filters, and analysed to understand how network communication works. An unencrypted HTTP GET request demonstrated how sensitive information can be exposed in plain text, while HTTPS encryption protects against eavesdropping. This exercise strengthened practical knowledge of packet analysis and secure network communication.
+This task provided practical experience in capturing and analysing live network traffic using Wireshark. Different protocols including TCP, DNS, HTTP, TLS, and ARP were analysed. An unencrypted HTTP GET request demonstrated how information can be exposed in plain text when HTTP is used. HTTPS protects communication by encrypting network traffic and preventing eavesdropping. This exercise strengthened my understanding of packet analysis and secure network communication.
 
 ---
 
