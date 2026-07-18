@@ -70,10 +70,6 @@ Captured packets included:
 - HTTP/1.1 200 OK
 - HTTP/1.1 301 Moved Permanently
 
-**Screenshot:**
-
-`screenshots/http_get_request.png`
-
 ---
 
 # DNS Display Filter
@@ -99,10 +95,6 @@ Example domains observed:
 - chatgpt.com
 - googleapis.com
 - neverssl.com
-
-**Screenshot:**
-
-`screenshots/dns_filter.png`
 
 ---
 
@@ -153,10 +145,6 @@ Packet Number:
 ```
 
 The TCP connection is successfully established after the three-way handshake.
-
-**Screenshot:**
-
-`screenshots/tcp_three_way_handshake.png`
 
 ---
 
@@ -291,24 +279,6 @@ The payload is the actual information or data carried inside a packet.
 A handshake is the process used to establish a communication session before data transfer begins.
 
 TCP uses a three-way handshake consisting of SYN, SYN-ACK, and ACK packets.
-
----
-
-# Files Included
-
-```
-CyberSecurity-Task8-WiresharkTrafficCapture/
-│
-├── README.md
-├── wireshark_capture.pcap
-└── screenshots/
-    ├── capture_started.png
-    ├── http_get_request.png
-    ├── dns_filter.png
-    ├── tcp_three_way_handshake.png
-    └── packet_details.png
-```
-
 ---
 
 # Ethics Note
