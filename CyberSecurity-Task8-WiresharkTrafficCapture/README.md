@@ -46,10 +46,6 @@ Wireshark requires permission to access the network interface.
 6. Stopped the capture.
 7. Saved the capture file as:
 
-```
-wireshark_capture.pcap
-```
-
 ---
 
 # HTTP Display Filter
@@ -116,21 +112,13 @@ The client sends a SYN packet requesting a connection.
 
 Packet Number: 11261
 
-```
-<Replace with your SYN packet numbe
-```
-
 ---
 
 ### Step 2 – SYN-ACK
 
 The server replies with a SYN-ACK packet acknowledging the request.
 
-Packet Number:
-
-```
-<Replace with your SYN-ACK packet number>
-```
+Packet Number: 11263
 
 ---
 
@@ -138,11 +126,7 @@ Packet Number:
 
 The client sends an ACK packet confirming the connection.
 
-Packet Number:
-
-```
-<Replace with your ACK packet number>
-```
+Packet Number: 11265
 
 The TCP connection is successfully established after the three-way handshake.
 
@@ -152,9 +136,6 @@ The TCP connection is successfully established after the three-way handshake.
 
 The captured network traffic was exported as:
 
-```
-wireshark_capture.pcap
-```
 
 The file is included in this GitHub repository.
 
