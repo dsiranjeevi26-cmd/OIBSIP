@@ -114,10 +114,10 @@ A TCP connection is established using three packets.
 
 The client sends a SYN packet requesting a connection.
 
-Packet Number:
+Packet Number: 11261
 
 ```
-<Replace with your SYN packet number>
+<Replace with your SYN packet numbe
 ```
 
 ---
