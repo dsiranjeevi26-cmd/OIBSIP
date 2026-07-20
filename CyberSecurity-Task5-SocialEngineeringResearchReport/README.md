@@ -1,3 +1,13 @@
+## Research Report
+
+**Name:** Siranjeevi D
+
+**Internship:** Oasis Infobyte Cyber Security Internship
+
+**Task:** Task 4 – Research Report: Common Network Security Threats
+
+**Date:** July 2026
+
 # Introduction
 
 Social engineering is a cyberattack technique in which attackers manipulate people into revealing confidential information or performing actions that compromise security. Instead of exploiting software or hardware vulnerabilities, social engineering exploits **human psychology**, such as trust, fear, curiosity, urgency, or the willingness to help others. Because every organization relies on people to access and manage information, attackers often find it easier to deceive individuals than to bypass technical security controls.
